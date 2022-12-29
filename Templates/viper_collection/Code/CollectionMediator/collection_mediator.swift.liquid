@@ -1,0 +1,55 @@
+//
+//  {{ prefix }}{{ module_info.name }}{{ module_info.file_name }}
+//
+
+import UIKit
+
+class {{ module_info.name }}CollectionMediator: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    var dataCount: Int = 0 {
+        didSet {
+            collectionView?.reloadData()
+        }
+    }
+    
+    var fillCellData: ((_ cell: {{ module_info.name }}CellViewInput, _ indexPath: IndexPath) -> Void)?
+    var cellSelectionClosure: ((_ indexPath: IndexPath) -> Void)?
+
+    init(_ cell: UICollectionViewCell.Type) {
+        self.cell = cell
+    }
+
+    private var reuse: String { String(describing: cell) }
+    private var cell: UICollectionViewCell.Type
+    private var tableView: UICollectionView?
+
+    func fillCollection(_ collection: UICollectionView?) {
+        self.collectionView = collection
+
+        collection?.delegate = self
+        collection?.dataSource = self
+        
+        collection?.register(cell, forCellWithReuseIdentifier: reuse)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataCount
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as? {{ module_info.name }}CollectionViewCell else { return UICollectionViewCell() }
+        fillCellData?(cell, indexPath)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? {{ module_info.name }}CollectionViewCell
+        cell?.isHighlighted = true
+        cellSelectionClosure?(indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? {{ module_info.name }}CollectionViewCell
+        cell?.isHighlighted = false
+    }
+}

@@ -1,0 +1,31 @@
+//
+//  {{ module_info.name }}{{ module_info.file_name }}
+//
+
+import Foundation
+
+typealias {{ module_info.name }}Result = Result<{{ module_info.name }}ResponseModel, NetworkResponse>
+
+final class {{ module_info.name }}Interactor: BaseInteractor {
+    func request(completion: @escaping ({{ module_info.name }}Result) -> ()) {
+        
+        let completed = {
+            (result: {{ module_info.name }}Result) in
+            
+            if case let .success(message) = result {
+                print("handle")
+            }
+            
+            DispatchQueue.main.async {
+                completion(result)
+            }
+        }
+        
+        let parsed = networkManager.parse(completed)
+//        networkManager.authProvider.request(
+//            .signin(
+//                nickname: nickname,
+//                    password: password),
+//            completion: parsed)
+    }
+}

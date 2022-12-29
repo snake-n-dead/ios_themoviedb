@@ -1,0 +1,27 @@
+# Template information section
+name: "viper_collection"
+summary: ""
+author: "Vladimir Vasilyev"
+version: "0.1.0"
+license: "MIT"
+
+# The declarations for code files
+
+code_files:
+# View layer
+- {name: ViewLayer/ViewInput.swift,  path: Code/ViewLayer/view_input.swift.liquid}
+- {name: ViewLayer/ViewController.swift, path: Code/ViewLayer/viewcontroller.swift.liquid}
+
+# Presenter layer
+- {name: Presenter/ViewOutput.swift, path: Code/Presenter/view_output.swift.liquid}
+- {name: Presenter/Presenter.swift, path: Code/Presenter/presenter.swift.liquid}
+
+# CollectionMediator layer
+- {name: CollectionMediator/CollectionMediator.swift, path: Code/CollectionMediator/collection_mediator.swift.liquid}
+
+# Router layer
+- {name: Router/RouterInput.swift, path: Code/Router/router_input.swift.liquid}
+- {name: Router/Router.swift, path: Code/Router/router.swift.liquid}
+
+#Builder layer
+- {name: Builder.swift, path: Code/builder.swift.liquid}

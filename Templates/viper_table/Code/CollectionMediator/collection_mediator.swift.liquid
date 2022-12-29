@@ -1,0 +1,50 @@
+//
+//  {{ prefix }}{{ module_info.name }}{{ module_info.file_name }}
+//
+
+import UIKit
+
+class {{ module_info.name }}CollectionMediator: NSObject, UITableViewDelegate, UITableViewDataSource {
+
+    var dataCount: Int = 0 {
+        didSet {
+            tableView?.reloadData()
+        }
+    }
+    
+    var fillCellData: ((_ cell: {{ module_info.name }}CellViewInput, _ indexPath: IndexPath) -> Void)?
+    var cellSelectionClosure: ((_ indexPath: IndexPath) -> Void)?
+
+    init(_ cell: UITableViewCell.Type) {
+        self.cell = cell
+    }
+
+    private var reuse: String { String(describing: cell) }
+    private var cell: UITableViewCell.Type
+    private var tableView: UITableView?
+
+    func fillCollection(_ tableView: UITableView?) {
+        self.tableView = tableView
+        
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        
+        tableView?.register(cell, forCellReuseIdentifier: reuse)
+    }
+        
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as? {{ module_info.name }}TableViewCell else { return UITableViewCell() }
+        
+        fillCellData?(cell, indexPath)
+        
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        cellSelectionClosure?(indexPath)
+    }
+}

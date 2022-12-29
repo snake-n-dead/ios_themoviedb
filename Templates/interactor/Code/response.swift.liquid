@@ -1,0 +1,14 @@
+//
+//  {{ module_info.name }}{{ module_info.file_name }}
+//
+
+import Foundation
+
+struct {{ module_info.name }}ResponseModel: Codable {
+    var value: String
+    
+    enum CodingKeys: String, CodingKey {
+        case value
+    }
+}
+

@@ -1,0 +1,12 @@
+# Template information section
+name: "interactor"
+summary: ""
+author: "Vladimir Vasilyev"
+version: "0.1.0"
+license: "MIT"
+
+# The declarations for code files
+
+code_files:
+- {name: Interactor.swift, path: Code/interactor.swift.liquid}
+- {name: ResponseModel.swift, path: Code/response.swift.liquid}

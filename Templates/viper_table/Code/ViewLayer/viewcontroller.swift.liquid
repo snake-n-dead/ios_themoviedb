@@ -1,0 +1,57 @@
+//
+//  {{ module_info.name }}{{ module_info.file_name }}
+//  {{ module_info.project_name }}
+//
+//  Created by {{ developer.name }} on {{ date }}.
+//  Copyright © {{ year }} {{ developer.company }}. All rights reserved.
+//
+
+import UIKit
+class {{ module_info.name }}ViewController: BaseModuleViewController {
+
+    var output: {{ module_info.name }}ViewOutput?
+    var collectionMediator: {{ module_info.name }}CollectionMediator?
+
+    //MARK: Props
+    
+    @IBOutlet private weak var table: UITableView?
+
+    //MARK: Init
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        setupActions()
+        setupDependencies()
+        output?.viewOnReady()
+    }
+    
+    private func setupDependencies() {
+        collectionMediator?.fillCollection(table)
+    }
+
+    private func setupUI() {
+
+    }
+
+    private func setupActions() {
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        output?.viewOnAppear()
+    }
+}
+
+//MARK: Private methods
+
+private extension {{module_info.name}}ViewController {
+
+}
+
+//MARK: - {{ module_info.name }}ViewInput methods
+
+extension {{module_info.name}}ViewController: {{module_info.name}}ViewInput {
+
+}

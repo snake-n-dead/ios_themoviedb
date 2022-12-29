@@ -1,0 +1,47 @@
+//
+//  {{ module_info.name }}{{ module_info.file_name }}
+//
+
+import UIKit
+
+class {{ module_info.name }}ViewController: BaseModuleViewController {
+
+    var output: {{ module_info.name }}ViewOutput!
+
+    //MARK: Props
+    
+
+    //MARK: Init
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        setupActions()
+        output.viewOnReady()
+    }
+
+    private func setupUI() {
+
+    }
+
+    private func setupActions() {
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        output.viewOnAppear()
+    }
+}
+
+//MARK: Private methods
+
+private extension {{module_info.name}}ViewController {
+
+}
+
+//MARK: - {{ module_info.name }}ViewInput methods
+
+extension {{module_info.name}}ViewController: {{module_info.name}}ViewInput {
+
+}

@@ -1,0 +1,30 @@
+//
+//  {{ module_info.name }}{{ module_info.file_name }}
+//
+
+import UIKit
+
+class {{ module_info.name }}Builder {
+
+    static func build(with router: Routable) -> {{ module_info.name }}ViewController {
+
+        let moduleRouter = {{ module_info.name }}Router()
+        let presenter = {{ module_info.name }}Presenter(router: moduleRouter)
+        
+        let storyboard = UIStoryboard(name: storyboard.rawValue, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "{{ module_info.name }}ViewController") as! {{ module_info.name }}ViewController
+        
+        let cellName = "{{ module_info.name }}CollectionViewCell"
+        let collectionMediator = {{ module_info.name }}CollectionMediator(cellName)
+        
+        viewController.output = presenter
+        viewController.collectionMediator = collectionMediator
+        
+        presenter.view = viewController
+        presenter.collectionMediator = collectionMediator
+        
+        moduleRouter.router = router
+        
+        return viewController
+    }
+}

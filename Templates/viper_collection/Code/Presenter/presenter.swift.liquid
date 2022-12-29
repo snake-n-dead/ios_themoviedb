@@ -1,0 +1,54 @@
+//
+//  {{ module_info.name }}{{ module_info.file_name }}
+//
+
+import Foundation
+
+class {{ module_info.name }}Presenter {
+
+    private weak var collectionMediator: {{ module_info.name }}CollectionMediator?
+    private weak var view: {{ module_info.name }}ViewInput?
+    
+    private let router: {{ module_info.name }}RouterInput
+    private var interactors = Interactors()
+
+    init(router: {{ module_info.name }}RouterInput, view: {{ module_info.name }}ViewInput?, collectionMediator: {{ module_info.name }}CollectionMediator?) {
+        self.collectionMediator = collectionMediator
+        self.router = router
+        self.view = view
+    }
+
+
+    private func setupDependencies() {
+        collectionMediator?.fillCellData = {
+            [weak self]
+            (cellInput, indexPath) in
+            guard let self_ = self else { return }
+//            _ = self_.data[indexPath.row]
+
+        }
+
+        collectionMediator?.cellSelectionClosure = {
+            [weak self]
+            (indexPath) in
+            guard let self_ = self else { return }
+//            _ = self_.data[indexPath.row]
+
+        }
+    }
+
+    //MARK: - Private
+
+}
+
+//MARK: {{ module_info.name }}ViewOutput methods
+extension {{ module_info.name }}Presenter: {{ module_info.name }}ViewOutput {
+
+    func viewOnReady() {
+
+    }
+
+    func viewOnAppear() {
+
+    }
+}

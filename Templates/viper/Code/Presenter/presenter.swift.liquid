@@ -1,0 +1,36 @@
+//
+//  {{ module_info.name }}{{ module_info.file_name }}
+//
+
+import Foundation
+
+class {{ module_info.name }}Presenter {
+
+    weak var view: {{ module_info.name }}ViewInput!
+
+    let router: {{ module_info.name }}RouterInput
+    var interactors = Interactors()
+
+    init(router: {{ module_info.name }}RouterInput) {
+        self.router = router
+        setupDependencies()
+    }
+
+    func setupDependencies() {
+
+    }
+
+    //MARK: - Private
+        
+}
+
+//MARK: {{ module_info.name }}ViewOutput methods
+extension {{ module_info.name }}Presenter: {{ module_info.name }}ViewOutput {
+    func viewOnReady() {
+
+    }
+
+    func viewOnAppear() {
+
+    }
+}
