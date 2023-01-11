@@ -1,9 +1,5 @@
 //
 //  EndPoint.swift
-//  NetworkLayer
-//
-//  Created by Malcolm Kumwenda on 2018/03/05.
-//  Copyright © 2018 Malcolm Kumwenda. All rights reserved.
 //
 
 import Foundation
@@ -19,7 +15,9 @@ protocol EndPointType {
 
 extension EndPointType {
     var baseURL: URL {
-        guard let url = URL(string: "http://192.168.1.100:3000/") else { fatalError("baseURL could not be configured.")}
+        guard let url = URL(string: Constants.baseURL) else {
+            fatalError("baseURL could not be configured.")
+        }
         return url
     }
     

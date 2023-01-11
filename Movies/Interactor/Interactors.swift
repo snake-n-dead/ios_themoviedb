@@ -1,17 +1,19 @@
 //
 //  Interactors.swift
-//  Sales
-//
-//  Created by Vladimir Vasilyev on 28.12.2022.
 //
 
 import Foundation
 
 struct Interactors {
     lazy var movies = Movies()
-    
+    lazy var genres = Genres()
+
     struct Movies {
-//        lazy var get = MoviesGetInteractor()
-//        lazy var search = MoviesSearchInteractor()
+        lazy var popular = PopularInteractor()
+        lazy var credits = CreditsInteractor()
+    }
+    
+    struct Genres {
+        lazy var list = GenresInteractor()
     }
 }

@@ -1,18 +1,13 @@
 //
 //  URLEncoding.swift
-//  NetworkLayer
-//
-//  Created by Malcolm Kumwenda on 2018/03/05.
-//  Copyright © 2018 Malcolm Kumwenda. All rights reserved.
 //
 
 import Foundation
 
 public struct URLParameterEncoder: ParameterEncoder {
-    public func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {
-        
+    
+    public func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {    
         guard let url = urlRequest.url else { throw NetworkError.missingURL }
-        
         if var urlComponents = URLComponents(url: url,
                                              resolvingAgainstBaseURL: false), !parameters.isEmpty {
             

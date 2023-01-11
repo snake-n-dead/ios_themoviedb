@@ -1,9 +1,5 @@
 //
 //  NetworkManager.swift
-//  NetworkLayer
-//
-//  Created by Malcolm Kumwenda on 2018/03/11.
-//  Copyright © 2018 Malcolm Kumwenda. All rights reserved.
 //
 
 import Foundation
@@ -48,7 +44,6 @@ enum NetworkResponse: Error, Equatable {
 }
 
 protocol NetworkManagerProtocol {
-    var authProvider: Provider<AuthApi> { get }
     var privateProvider: Provider<PrivateApi> { get }
 
     func parse<T: Codable>(
@@ -57,7 +52,6 @@ protocol NetworkManagerProtocol {
 
 class NetworkManager: NetworkManagerProtocol {
     
-    var authProvider = Provider<AuthApi>()
     var privateProvider = Provider<PrivateApi>()
 
     func parse<T: Codable>(
@@ -79,11 +73,8 @@ class NetworkManager: NetworkManagerProtocol {
                         return
                     }
                     do {
-                        print(responseData)
-                        let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
-                        print(jsonData)
-                        let apiResponse = try JSONDecoder().decode(Message<T>.self, from: responseData)
-                        completion(.success(apiResponse.message))
+                        let apiResponse = try JSONDecoder().decode(T.self, from: responseData)
+                        completion(.success(apiResponse))
                     } catch {
                         print(error)
                         completion(.failure(NetworkResponse.unableToDecode))
@@ -95,7 +86,7 @@ class NetworkManager: NetworkManagerProtocol {
                         
                         var error = ""
                         if let apiResponse = apiResponse {
-                            error = apiResponse.message
+                            error = apiResponse.results
                         }
                         else if let string = String(data: data, encoding: .utf8) {
                             error = string

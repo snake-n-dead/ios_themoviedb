@@ -1,16 +1,12 @@
 //
 //  NetworkLogger.swift
-//  NetworkLayer
-//
-//  Created by Malcolm Kumwenda on 2018/03/11.
-//  Copyright © 2018 Malcolm Kumwenda. All rights reserved.
 //
 
 import Foundation
 
 class NetworkLogger {
+    
     static func log(request: URLRequest) {
-        
         print("\n - - - - - - - - - - OUTGOING - - - - - - - - - - \n")
         defer { print("\n - - - - - - - - - -  END - - - - - - - - - - \n") }
         

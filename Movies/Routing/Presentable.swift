@@ -1,8 +1,5 @@
 //
 //  Presentable.swift
-//  Sales
-//
-//  Created by Vladimir Vasilyev on 28.12.2022.
 //
 
 import UIKit

@@ -1,19 +1,14 @@
 //
 //  Router.swift
-//  Sales
-//
-//  Created by Vladimir Vasilyev on 28.12.2022.
 //
 
 import UIKit
 
-typealias RouterCompletions = [UIViewController : Closure]
+typealias RouterCompletions = [UIViewController: Closure]
 
 final class Router: NSObject {
     
-    // MARK:- Private variables
     fileprivate weak var rootController: UINavigationController?
-    
     fileprivate var completions: RouterCompletions
     
     init(rootController: UINavigationController) {
@@ -26,7 +21,6 @@ final class Router: NSObject {
     }
 }
 
-// MARK:- Private methods
 private extension Router {
     func runCompletion(for controller: UIViewController) {
         guard let completion = completions[controller] else { return }
@@ -35,23 +29,12 @@ private extension Router {
     }
 }
 
-// MARK:- Routable
+// MARK: - Routable methods
 extension Router: Routable {
-    func present(_ module: Presentable?) {
-        present(module, animated: true)
-    }
     
     func present(_ module: Presentable?, animated: Bool) {
         guard let controller = module?.toPresent else { return }
         rootController?.present(controller, animated: animated, completion: nil)
-    }
-    
-    func push(_ module: Presentable?)  {
-        push(module, animated: true)
-    }
-    
-    func push(_ module: Presentable?, animated: Bool)  {
-        push(module, animated: animated, completion: nil)
     }
     
     func push(_ module: Presentable?, animated: Bool, completion: Closure?) {
@@ -66,26 +49,14 @@ extension Router: Routable {
         rootController?.pushViewController(controller, animated: animated)
     }
     
-    func popModule()  {
-        popModule(animated: true)
-    }
-    
     func popModule(animated: Bool)  {
         if let controller = rootController?.popViewController(animated: animated) {
             runCompletion(for: controller)
         }
     }
     
-    func dismissModule() {
-        dismissModule(animated: true, completion: nil)
-    }
-    
     func dismissModule(animated: Bool, completion: Closure?) {
         rootController?.dismiss(animated: animated, completion: completion)
-    }
-    
-    func setRootModule(_ module: Presentable?) {
-        setRootModule(module, hideBar: false)
     }
     
     func setRootModule(_ module: Presentable?, hideBar: Bool) {

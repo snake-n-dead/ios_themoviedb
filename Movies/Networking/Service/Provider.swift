@@ -1,14 +1,13 @@
 //
 //  NetworkService.swift
-//  NetworkLayer
-//
-//  Created by Malcolm Kumwenda on 2018/03/07.
-//  Copyright © 2018 Malcolm Kumwenda. All rights reserved.
 //
 
 import Foundation
 
-public typealias NetworkRouterCompletion = (_ data: Data?,_ response: URLResponse?,_ error: Error?)->()
+public typealias NetworkRouterCompletion = (
+    _ data: Data?,
+    _ response: URLResponse?,
+    _ error: Error?) -> ()
 
 protocol NetworkProvider: AnyObject {
     associatedtype EndPoint: EndPointType
@@ -28,14 +27,15 @@ class Provider<EndPoint: EndPointType>: NetworkProvider {
             task = session.dataTask(with: request, completionHandler: { data, response, error in
                 completion(data, response, error)
             })
-        }catch {
+        } catch {
             completion(nil, nil, error)
         }
-        self.task?.resume()
+        
+        task?.resume()
     }
     
     func cancel() {
-        self.task?.cancel()
+        task?.cancel()
     }
     
     fileprivate func buildRequest(from route: EndPoint) throws -> URLRequest {

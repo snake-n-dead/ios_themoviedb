@@ -1,25 +1,20 @@
 //
 //  ParameterEncoding.swift
-//  NetworkLayer
-//
-//  Created by Malcolm Kumwenda on 2018/03/05.
-//  Copyright © 2018 Malcolm Kumwenda. All rights reserved.
 //
 
 import Foundation
 
-public typealias Parameters = [String:Any]
+public typealias Parameters = [String: Any]
 
 public protocol ParameterEncoder {
     func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws
 }
 
 public enum ParameterEncoding {
-    
+
     case urlEncoding
     case jsonEncoding
     case urlAndJsonEncoding
-    case multipartFormData
 
     public func encode(urlRequest: inout URLRequest,
                        bodyParameters: Parameters?,
@@ -39,16 +34,12 @@ public enum ParameterEncoding {
                     let urlParameters = urlParameters else { return }
                 try URLParameterEncoder().encode(urlRequest: &urlRequest, with: urlParameters)
                 try JSONParameterEncoder().encode(urlRequest: &urlRequest, with: bodyParameters)
-            case .multipartFormData:
-                guard let bodyParameters = bodyParameters else { return }
-                try MultipartFormDataEncoder().encode(urlRequest: &urlRequest, with: bodyParameters)
             }
-        }catch {
+        } catch {
             throw error
         }
     }
 }
-
 
 public enum NetworkError : String, Error {
     case parametersNil = "Parameters were nil."
