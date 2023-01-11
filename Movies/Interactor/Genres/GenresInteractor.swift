@@ -18,5 +18,8 @@ final class GenresInteractor: BaseInteractor {
         }
         
         let parsed = networkManager.parse(completed)
+        networkManager.privateProvider.request(
+            .getGenres,
+            completion: parsed)
     }
 }

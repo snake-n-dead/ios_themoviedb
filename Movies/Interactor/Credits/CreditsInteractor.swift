@@ -18,5 +18,8 @@ final class CreditsInteractor: BaseInteractor {
         }
         
         let parsed = networkManager.parse(completed)
+        networkManager.privateProvider.request(
+            .getCredits(movieId: movieId),
+            completion: parsed)
     }
 }
